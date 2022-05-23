@@ -1,0 +1,75 @@
+{
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          [
+            "builtin",
+            "external"
+          ],
+          "internal",
+          [
+            "index",
+            "parent",
+            "sibling"
+          ]
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  },
+  "settings": {
+    "import/extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx",
+      ".scss",
+      ".css"
+    ],
+    "import/resolver": {
+      "eslint-import-resolver-custom-alias": {
+        "alias": {
+          "components": "./src/components",
+          "pages": "./src/pages"
+        },
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".json",
+          ".scss",
+          ".css"
+        ]
+      }
+    }
+  },
+  "globals": {
+    "mountWithProvider": true,
+    "nextTick": true,
+    "reducerTester": true,
+    "cordova": true,
+    "epicTester": true,
+    "addTimeFrames": true
+  }
+}

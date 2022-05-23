@@ -1,0 +1,47 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '🏗️👷 Styling, testing and building your project before committing'
+
+# Check Prettier standards
+yarn format ||
+(
+    echo '🤢🤮 Your styling looks disgusting. 🤮🤢
+    . Prettier Check Failed. You can run  
+    . yarn format:fix (this will fix all the formatting problems)
+    . Please fix the pending items and try committing again';
+    false;
+)
+
+# Check ESLint Standards
+yarn lint ||
+(
+        echo '😤 ESLint Check Failed 😤
+        . Make the required changes listed above. You can run
+        . yarn lint (this will fix all eslint autofixable problems) 
+        . Please fix the pending items and try committing again';
+        false;
+)
+
+
+# If everything passes... Now we can commit
+echo '🤔 Code looks good to me. Running tests... 🤔'
+yarn test -o ||
+(
+         echo '😤🏀 Some tests failed 🏀😤
+        . Please fix the pending items and try committing again';
+        false;
+)
+
+# If everything passes... Now we can commit
+echo '🤞 Everything looks good, this final step shall pass successfully 🤞'
+yarn build ||
+(
+        echo '😤🏀 build failed 🏀😤
+        . Please fix the pending items and try committing again';
+        false;
+)
+
+
+# If everything passes... Now we can commit
+echo '✅ Good. I am committing the changes now. ✅'
